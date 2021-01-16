@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
-import { Form, Input, Button,message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import './index.css'
-import {reqLogin} from '../../api'
+import { reqLogin } from '../../api'
 
 export default class Login extends Component {
     onFinish = (values) => {
-        console.log(values)
         reqLogin(values).then(result => {
-            // console.log(result.data)
-            if(result.data.status === 0){
+            if (result.data.status === 0) {
                 message.success('登录成功')
-                this.props.history.replace('/admin')
-            }else{
+                this.props.history.replace('/')
+            } else {
                 message.error('登录失败')
             }
-        },reason => {
+        }, reason => {
             console.log(reason)
         })
     };
@@ -48,7 +46,7 @@ export default class Login extends Component {
                         <Form.Item
                             name="password"
                             rules={[
-                                {required: true,message: 'Please input your Password!',},
+                                { required: true, message: 'Please input your Password!', },
                                 { min: 4, message: '用户名不少于4位' },
                                 { max: 12, message: '用户名不大于12位' },
                                 { pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成' }
