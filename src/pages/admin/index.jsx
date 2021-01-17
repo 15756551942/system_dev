@@ -19,12 +19,12 @@ export default class Admin extends Component {
     render() {
         return (
             <Layout className='admin'>
-                <Sider>
+                <Sider style={{height:'100%'}}>
                     <LeftNav />
                 </Sider>
                 <Layout>
-                    <Header>Header</Header>
-                    <Content style={{backgroundColor:'white'}}>
+                    <Header />
+                    <Content style={{backgroundColor:'white',margin:'20px'}}>
                         <Switch>
                             <Route path='/home' component={Home}/>
                             <Route path='/category' component={Category}/>

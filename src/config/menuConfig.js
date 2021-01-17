@@ -1,15 +1,15 @@
 import React from 'react'
 import {
-    HomeOutlined,/*首页*/
-    AppstoreOutlined,/*商品*/
-    BarsOutlined,/*品类管理*/
-    ToolOutlined,/*商品管理*/
-    UserOutlined,/*用户管理*/
-    SafetyCertificateOutlined,/*角色管理*/
-    AreaChartOutlined,/*图形图表*/
-    BarChartOutlined,/*柱形图*/
-    LineChartOutlined,/*折线图*/
-    PieChartOutlined,/*饼图*/
+    HomeOutlined,
+    AppstoreOutlined,
+    BarsOutlined,
+    ToolOutlined,
+    UserOutlined,
+    SafetyCertificateOutlined,
+    AreaChartOutlined,
+    BarChartOutlined,
+    LineChartOutlined,
+    PieChartOutlined,
   } from '@ant-design/icons';
 
 

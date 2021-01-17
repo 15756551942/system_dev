@@ -10,9 +10,9 @@ export default class Login extends Component {
         reqLogin(values).then(result => {
             if (result.data.status === 0) {
                 message.success('登录成功')
-                this.props.history.replace('/')
+                this.props.history.replace({pathname:'/'})
             } else {
-                message.error('登录失败')
+                message.error(result.msg)
             }
         }, reason => {
             console.log(reason)

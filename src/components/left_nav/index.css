@@ -1,3 +1,7 @@
+.left_nav {
+    height: 100%;
+}
+
 .left_nav .left_nav_header{
     display: flex;
     align-items: center;
