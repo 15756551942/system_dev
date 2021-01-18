@@ -6,6 +6,7 @@ import logo from '../../assets/images/logo192.png'
 import {formateDate} from '../../utils/dateUtils'
 import {reqWeather} from '../../api'
 import menuList from '../../config/menuConfig'
+import LinkButton from '../../components/link_button'
 
 class Header extends Component {
     state = {
@@ -49,7 +50,7 @@ class Header extends Component {
             <div className='header'>
                 <div className='header_top'>
                     <span>欢迎，admin</span>
-                    <a href=':;'>退出</a>
+                    <LinkButton>退出</LinkButton>
                 </div>
                 <div className='header_bottom'>
                     <div className='header_bottom_left'>{title}</div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Route,Switch,Redirect} from 'react-router-dom'
 import { Layout } from 'antd'
 
-import './index.css'
 import Home from '../../pages/home'
 import Category from '../../pages/category'
 import Product from '../../pages/product'
@@ -18,9 +17,9 @@ const { Footer, Content, Sider } = Layout
 export default class Admin extends Component {
     render() {
         return (
-            <Layout className='admin'>
-                <Sider style={{height:'100%'}}>
-                    <LeftNav />
+            <Layout style={{minHeight:'100%'}}>
+                <Sider>
+                    <LeftNav/>
                 </Sider>
                 <Layout>
                     <Header />
