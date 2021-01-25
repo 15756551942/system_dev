@@ -10,7 +10,7 @@ export default class Login extends Component {
         reqLogin(values).then(result => {
             if (result.data.status === 0) {
                 message.success('登录成功')
-                this.props.history.replace('/admin')
+                this.props.history.replace('/home')
             } else {
                 message.error(result.msg)
             }
