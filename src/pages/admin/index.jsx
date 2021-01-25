@@ -12,6 +12,7 @@ import Line from '../../pages/charts/line'
 import Pie from '../../pages/charts/pie'
 import Header from '../../components/header'
 import LeftNav from '../../components/left_nav'
+import userEvent from '@testing-library/user-event'
 const { Footer, Content, Sider } = Layout
 
 export default class Admin extends Component {
@@ -33,7 +34,6 @@ export default class Admin extends Component {
                             <Route path='/charts/bar' component={Bar}/>
                             <Route path='/charts/line' component={Line}/>
                             <Route path='/charts/pie' component={Pie}/>
-                            <Redirect to='/home' />
                         </Switch>
                     </Content>
                     <Footer style={{textAlign:'center',color:'#ccc'}}>推荐使用谷歌浏览器，可以获得更佳页面操作体验</Footer>

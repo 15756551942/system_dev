@@ -9,8 +9,8 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-        <Route path='/login' component={Login}/>
-        <Route path='/' component={Admin}/>
+          <Route path='/login' component={Login}/>
+          <Route path='/' component={Admin}/>
         </Switch>
       </BrowserRouter>
     )
