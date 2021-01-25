@@ -1,0 +1,8 @@
+version: "1"
+services:
+  bcs-frontend:
+    image: system_dev:latest
+    container_name: system_dev
+    restart: unless-stopped
+    ports:
+      - "80:80"
