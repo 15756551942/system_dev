@@ -7,10 +7,12 @@ import { reqLogin } from '../../api'
 
 export default class Login extends Component {
     onFinish = (values) => {
+        
         reqLogin(values).then(result => {
+            console.log(result)
             if (result.data.status === 0) {
                 message.success('登录成功')
-                this.props.history.replace('/admin')
+                this.props.history.replace('/')
             } else {
                 message.error(result.msg)
             }
@@ -18,6 +20,10 @@ export default class Login extends Component {
             console.log(reason)
         })
     };
+
+    // handleSubmit = (event) => {
+    //     event.preventDefault()
+    // }
 
     render() {
         return (
@@ -59,7 +65,7 @@ export default class Login extends Component {
                             />
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button">Log in</Button>
+                            <Button type="primary" htmlType="submit" className="login-form-button" >Log in</Button>
                         </Form.Item>
                     </Form>
                 </div>
