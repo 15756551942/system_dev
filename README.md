@@ -73,11 +73,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### deploy
 1. ssh  root@49.234.86.169
 2. cd system_dev
-3. git pull 
-4. npm run build
-5. docker stop system_dev
-6. docker rm system_dev
-7. docker rmi system_dev
-8. docker build -t razzil-front .
-9. docker run --name system_dev -d -p 80:80 system_dev
+3. 如果安装了新依赖 git pull 然后 npm install   (否则忽略第三步)
+4. ./deploy.sh
 

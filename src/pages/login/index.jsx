@@ -12,9 +12,9 @@ export default class Login extends Component {
             console.log(result)
             if (result.data.status === 0) {
                 message.success('登录成功')
-                this.props.history.replace('/')
+                this.props.history.replace('/home')
             } else {
-                message.error(result.msg)
+                message.error(result.data.msg)
             }
         }, reason => {
             console.log(reason)
