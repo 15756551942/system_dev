@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {Modal} from 'antd'
+import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 import './index.css'
@@ -7,7 +9,7 @@ import {formateDate} from '../../utils/dateUtils'
 import {reqWeather} from '../../api'
 import menuList from '../../config/menuConfig'
 import LinkButton from '../../components/link_button'
-import {connect} from 'react-redux'
+import {reset_user} from '../../redux/actions'
 
 class Header extends Component {
     state = {
@@ -15,7 +17,7 @@ class Header extends Component {
         weather: '',
     }
     getTime = () => {
-        setInterval(() => {
+        this.t = setInterval(() => {
             const currentTime = formateDate(Date.now())
             this.setState({currentTime})
         }, 1000);
@@ -40,22 +42,34 @@ class Header extends Component {
         })
         return title
     }
+    quitLogin = () => {
+        Modal.confirm({
+            content:'确定退出吗？',
+            onOk:() => {
+                this.props.reset_user()
+                this.props.history.replace('/login')
+            }
+        })
+    }
     componentDidMount(){
         this.getTime()
         this.getWeather()
     }
+    componentWillUnmount(){
+        clearTimeout(this.t)
+    }
     render() {
         const {currentTime,weather} = this.state
-        // const title = this.getTitle()
-        const title = this.props.headTitle
+        const {headTitle,user} = this.props
+        
         return (
             <div className='header'>
                 <div className='header_top'>
-                    <span>欢迎，admin</span>
-                    <LinkButton>退出</LinkButton>
+                    <span>欢迎，{user?user.username:''}</span>
+                    <LinkButton onClick={this.quitLogin}>退出</LinkButton>
                 </div>
                 <div className='header_bottom'>
-                    <div className='header_bottom_left'>{title}</div>
+                    <div className='header_bottom_left'>{headTitle}</div>
                     <div className='header_bottom_right'>
                         <span>{currentTime}</span>
                         <img src={logo} alt="weather"/>
@@ -68,6 +82,6 @@ class Header extends Component {
 }
 
 export default connect(
-    state => ({headTitle:state.headTitle}),
-    {}
+    state => ({headTitle:state.headTitle,user:state.user}),
+    {reset_user}
 )(withRouter(Header))

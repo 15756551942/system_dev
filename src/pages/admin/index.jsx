@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Route,Switch,Redirect} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 import { Layout } from 'antd'
 
 import Home from '../../pages/home'
@@ -12,7 +12,6 @@ import Line from '../../pages/charts/line'
 import Pie from '../../pages/charts/pie'
 import Header from '../../components/header'
 import LeftNav from '../../components/left_nav'
-import userEvent from '@testing-library/user-event'
 const { Footer, Content, Sider } = Layout
 
 export default class Admin extends Component {

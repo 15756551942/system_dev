@@ -1,29 +1,15 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import { connect } from 'react-redux'
+import {login} from '../../redux/actions'
 import './index.css'
-import { reqLogin } from '../../api'
 
-export default class Login extends Component {
+class Login extends Component {
     onFinish = (values) => {
-        
-        reqLogin(values).then(result => {
-            console.log(result)
-            if (result.data.status === 0) {
-                message.success('登录成功')
-                this.props.history.replace('/home')
-            } else {
-                message.error(result.data.msg)
-            }
-        }, reason => {
-            console.log(reason)
-        })
+        this.props.login(values,this.props.history)
     };
-
-    // handleSubmit = (event) => {
-    //     event.preventDefault()
-    // }
 
     render() {
         return (
@@ -46,8 +32,9 @@ export default class Login extends Component {
                                 { max: 12, message: '用户名不大于12位' },
                                 { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文、数字或下划线组成' }
                             ]}
+                            initialValue='admin' 
                         >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"/>
                         </Form.Item>
                         <Form.Item
                             name="password"
@@ -57,6 +44,7 @@ export default class Login extends Component {
                                 { max: 12, message: '用户名不大于12位' },
                                 { pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成' }
                             ]}
+                            initialValue='admin'
                         >
                             <Input
                                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -73,3 +61,8 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect(
+    state => ({id:state.user}),
+    {login}
+)(Login)

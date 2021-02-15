@@ -26,7 +26,7 @@ export default class Category extends Component {
                 title: '操作',
                 render: (category) => (
                     <span>
-                        <LinkButton onClick={this.showUpdate}>修改分类</LinkButton>
+                        <LinkButton onClick={() => {this.showUpdate(category)}}>修改分类</LinkButton>
                         {
                             this.state.parentId === '0' ? <LinkButton onClick={() => { this.showSubcategorys(category) }}>查看子分类</LinkButton> : null
                         }
@@ -80,13 +80,21 @@ export default class Category extends Component {
     addCategory = () => {
         
     }
-    showUpdate = () => {
+    showUpdate = (category) => {
+        this.category = category
         this.setState({
             showStatus:2
         })
     }
     updateCategory = () => {
-        
+        // this.setState({
+        //     showStatus:0
+        // })
+
+        // const categoryId = this.category._id
+        // const result = await reqUpdateCategory({categoryId,categoryName})
+
+        // this.getCategorys()
     }
     UNSAFE_componentWillMount() {
         this.initColums()
@@ -96,6 +104,7 @@ export default class Category extends Component {
     }
     render() {
         const { categorys, isLoading, subCategorys, parentId, parentName,showStatus } = this.state
+        const category = this.category || {}
         const title = parentId === '0' ? '一级分类列表' : (
             <span>
                 <LinkButton onClick={this.showCategorys}>一级分类列表</LinkButton>
@@ -121,10 +130,10 @@ export default class Category extends Component {
                     loading={isLoading}
                 />
                 <Modal title="添加分类" visible={showStatus === 1} onOk={this.addCategory} onCancel={this.handleCancel}>
-                    <AddForm />
+                    <AddForm categorys={categorys} parentId={parentId} />
                 </Modal>
                 <Modal title="更新分类" visible={showStatus === 2} onOk={this.updateCategory} onCancel={this.handleCancel}>
-                    <UpdateForm />
+                    <UpdateForm categoryName={category.name} />
                 </Modal>
             </Card>
         )
