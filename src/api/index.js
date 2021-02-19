@@ -11,6 +11,7 @@ export const reqUpdateCategory = (categoryId, categoryName) => ajax(BASE + '/man
 export const reqProducts = (pageNum,pageSize) => ajax(BASE + '/manage/product/list',{pageNum,pageSize})
 export const reqSearchProducts = (pageNum,pageSize,searchType,searchName) => ajax(BASE + '/manage/product/search',{pageNum,pageSize,[searchType]:searchName})
 export const reqCategory = (categoryId) => ajax(BASE + '/manage/category/info',{categoryId})
+export const reqUpdateStatus = (productId,status) => ajax(BASE + '/manage/product/updateStatus',{productId,status},'POST')
 
 export const reqWeather = () => {
     return new Promise((resolve, reject) => {

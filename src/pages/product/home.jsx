@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Select, Input, Button, Table } from 'antd'
+import { Card, Select, Input, Button, Table,message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
 import LinkButton from '../../components/link_button'
-import { reqProducts, reqSearchProducts } from '../../api'
+import { reqProducts, reqSearchProducts,reqUpdateStatus } from '../../api'
 
 export default class ProductHome extends Component {
     state = {
@@ -30,12 +30,13 @@ export default class ProductHome extends Component {
             {
                 width: 100,
                 title: '状态',
-                dataIndex: 'status',
-                render: (status) => {
+                render: (product) => {
+                    const {status,_id} = product
+                    const newStatus = status===1?2:1
                     return (
                         <span>
-                            <Button type='primary'>下架</Button>
-                            <span>在售</span>
+                            <Button type='primary' onClick={() => this.updateStatus(_id,newStatus)} >{status===1?'下架':'上架'}</Button>
+                            <span>{status===1?'在售':'已下架'}</span>
                         </span>
                     )
                 }
@@ -55,6 +56,7 @@ export default class ProductHome extends Component {
         ];
     }
     getProducts = (pageNum) => {
+        this.pageNum = pageNum
         const { searchName, searchType } = this.state
         if (searchName) {
             reqSearchProducts(pageNum, 3, searchType, searchName).then((result) => {
@@ -82,6 +84,13 @@ export default class ProductHome extends Component {
             })
         }
     }
+    updateStatus = async (productId,status) => {
+        let result = await reqUpdateStatus(productId,status)
+        if(result.data.status === 0){
+            message.success('更新商品成功')
+            this.getProducts(this.pageNum)
+        }
+    }
     UNSAFE_componentWillMount() {
         this.initColumns()
     }
@@ -106,7 +115,7 @@ export default class ProductHome extends Component {
             </span>
         )
         const extra = (
-            <Button icon={<PlusOutlined />} type='primary'>添加商品</Button>
+            <Button icon={<PlusOutlined />} type='primary' onClick={() => this.props.history.push('/product/addupdate')} >添加商品</Button>
         )
         return (
             <Card title={title} extra={extra} >

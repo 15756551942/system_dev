@@ -12,8 +12,8 @@ export default class Product extends Component {
             <Switch>
                 <Route path='/product' component={ProductHome} exact />
                 <Route path='/product/detail' component={ProductDetail} />
-                <Route path='product/addupdate' component={ProductAddUpdate} />
-                <Redirect to='product' />
+                <Route path='/product/addupdate' component={ProductAddUpdate} />
+                <Redirect to='/product' />
             </Switch>
         )
     }
