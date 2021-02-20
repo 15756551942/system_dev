@@ -4,6 +4,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 
 import CasCader from '../../components/cascader'
 import PictureWall from './pictures_wall'
+import RichTextEditor from './rich_text_editor'
 
 export default class ProductAddUpdate extends Component {
     onFinish = (values) => {
@@ -53,8 +54,8 @@ export default class ProductAddUpdate extends Component {
                     <Form.Item label='商品图片'>
                         <PictureWall />
                     </Form.Item>
-                    <Form.Item label='商品详情'>
-                        <Input></Input>
+                    <Form.Item label='商品详情' labelCol={{span:2}} wrapperCol={{span:20}}>
+                        <RichTextEditor />
                     </Form.Item>
                     <Form.Item>
                         <Button type='primary'>提交</Button>
