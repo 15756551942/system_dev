@@ -12,6 +12,8 @@ export const reqProducts = (pageNum,pageSize) => ajax(BASE + '/manage/product/li
 export const reqSearchProducts = (pageNum,pageSize,searchType,searchName) => ajax(BASE + '/manage/product/search',{pageNum,pageSize,[searchType]:searchName})
 export const reqCategory = (categoryId) => ajax(BASE + '/manage/category/info',{categoryId})
 export const reqUpdateStatus = (productId,status) => ajax(BASE + '/manage/product/updateStatus',{productId,status},'POST')
+export const reqRoles = () => ajax(BASE + '/manage/role/list')
+export const reqAddRole = (roleName) => ajax(BASE + '/manage/role/add',{roleName},'POST')
 
 export const reqWeather = () => {
     return new Promise((resolve, reject) => {
