@@ -14,6 +14,7 @@ export const reqCategory = (categoryId) => ajax(BASE + '/manage/category/info',{
 export const reqUpdateStatus = (productId,status) => ajax(BASE + '/manage/product/updateStatus',{productId,status},'POST')
 export const reqRoles = () => ajax(BASE + '/manage/role/list')
 export const reqAddRole = (roleName) => ajax(BASE + '/manage/role/add',{roleName},'POST')
+export const reqUpdateRole = (role) => ajax(BASE + '/manage/role/update',role,'POST')
 
 export const reqWeather = () => {
     return new Promise((resolve, reject) => {

@@ -4,17 +4,24 @@ import { Form, Input, Tree } from 'antd'
 import menuList from '../../config/menuConfig'
 
 export default class AuthForm extends Component {
-    // getTreeData = (menuList) => {
-    //     return menuList.reduce((pre,item) => {
-    //         pre.push(item)
-    //         return pre
-    //     },[])
-    // }
-    // UNSAFE_componentWillMount() {
-    //     this.treeData = this.getTreeData(menuList)
-    // }
+    constructor(props){
+        super(props)
+        let {menus}=this.props.role
+        this.state={
+            checkedKeys:menus
+        }
+    }
+    onCheck = checkedKeys => {
+        this.setState({checkedKeys})
+    }
+    getMenus = () => this.state.checkedKeys
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let menus = nextProps.role.menus
+        this.setState({checkedKeys:menus})
+    }
     render() {
         const { role } = this.props
+        const {checkedKeys} = this.state
         const treeData = [
             {
                 title:'平台权限',
@@ -33,6 +40,8 @@ export default class AuthForm extends Component {
                     checkable
                     defaultExpandAll={true}
                     treeData={treeData}
+                    checkedKeys={checkedKeys}
+                    onCheck={this.onCheck}
                 />
             </div>
         )

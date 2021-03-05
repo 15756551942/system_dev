@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import {Card,Button,Table,Modal,message} from 'antd'
 
-import {reqRoles,reqAddRole} from '../../api'
+import {reqRoles,reqAddRole,reqUpdateRole} from '../../api'
 import AddRole from './add_role'
 import AuthForm from './auth_form'
 
 export default class Role extends Component {
-    state = {
-        roles:[],
-        role:[],
-        isShowAdd:false,
-        isShowAuth:false
-    }
     constructor(props) {
         super(props)
+        this.state = {
+            roles:[],
+            role:[],
+            isShowAdd:false,
+            isShowAuth:false
+        }
         this.ADDROLE = React.createRef()
+        this.auth = React.createRef()
     }
     initColumns = () => {
         this.columns = [
@@ -66,8 +67,16 @@ export default class Role extends Component {
         }
         // console.log(roleName)
     }
-    updateRole = () => {
-
+    updateRole = async () => {
+        this.setState({isShowAuth:false})
+        let role = this.state.role
+        let menus = this.auth.current.getMenus()
+        role.menus = menus
+        let result = await reqUpdateRole(role)
+        if(result.data.status === 0){
+            message.success('设置角色权限成功')
+            this.getRoles()
+        }
     }
     UNSAFE_componentWillMount() {
         this.initColumns()
@@ -98,7 +107,7 @@ export default class Role extends Component {
                     <AddRole ref={this.ADDROLE} />
                 </Modal>
                 <Modal title="设置角色权限" visible={isShowAuth} onOk={this.updateRole} onCancel={() => {this.setState({isShowAuth:false})}}>
-                    <AuthForm role={role} />
+                    <AuthForm role={role} ref={this.auth} />
                 </Modal>
             </Card>
         )
